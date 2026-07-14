@@ -121,6 +121,8 @@ output "karpenter" {
     discovery_key   = local.karpenter.discovery_key
     discovery_value = local.karpenter.discovery_value
 
+    version           = local.karpenter.version
+    extra_helm_values = var.karpenter_extra_helm_values
   }
 }
 
