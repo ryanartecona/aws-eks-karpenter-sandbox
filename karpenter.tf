@@ -91,8 +91,8 @@ resource "helm_release" "karpenter" {
   version    = local.karpenter.version
 
   # https://github.com/aws/karpenter-provider-aws/blob/v1.2.2/charts/karpenter/values.yaml
-  values = [
-    yamlencode({
+  values = concat(
+    [yamlencode({
       replicas : var.karpenter_replica_count
       logLevel : "debug"
       settings : {
@@ -131,8 +131,9 @@ resource "helm_release" "karpenter" {
           effect : "NoSchedule"
         },
       ]
-    }),
-  ]
+    })],
+    var.karpenter_extra_helm_values != null ? [yamlencode(var.karpenter_extra_helm_values)] : []
+  )
 
   lifecycle {
     ignore_changes = [
