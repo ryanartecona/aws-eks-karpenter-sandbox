@@ -322,6 +322,12 @@ variable "karpenter_ec2nodeclass_default_metadata_options" {
   }
 }
 
+variable "karpenter_extra_helm_values" {
+  type        = map(any)
+  description = "Extra values to pass to the karpenter helm chart."
+  default     = null
+}
+
 variable "additional_tags" {
   type        = map(any)
   description = "Extra tags to append to the default tags that will be added to install resources."
