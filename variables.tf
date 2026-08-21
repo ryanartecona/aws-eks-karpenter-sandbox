@@ -250,6 +250,12 @@ variable "cluster_endpoint_public_access" {
   default     = false
 }
 
+variable "cluster_encryption_kms_key_id" {
+  type        = string
+  description = "An existing KMS key (CMK) to use for EKS secrets encryption, given as a key ID, key ARN, alias name, or alias ARN. The key must live in the same region as the cluster and its key policy must allow the cluster IAM role to use it. If empty, this module creates a key."
+  default     = ""
+}
+
 variable "cluster_addons" {
   type        = any
   description = "EKS cluster addons to merge on top of the built-in defaults (coredns, eks-pod-identity-agent, kube-proxy, vpc-cni). Provide a map keyed by addon name to override or extend defaults. Set a key to `null` to remove a default addon."
